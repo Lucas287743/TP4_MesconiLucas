@@ -10,6 +10,7 @@ public interface IClienteService {
 	public void guardarCliente(Cliente unCliente);
 	public Cliente crearCliente();
 	public List<Cliente> obtenerTodosClientes();
-	public Cliente encontrarUnCliente(int dni);
+	public Cliente encontrarUnCliente(int dni) throws Exception;
 	public void modificarCliente(Cliente clienteModificado);
+	void eliminarCliente(int dni) throws Exception;
 }

@@ -92,47 +92,44 @@
 					<td th:text="${prod.precio}"></td>
 					<td th:text="${prod.marca}"></td>
 					<td th:text="${prod.stock}"></td>
-					<td><a href="#"
-						th:href="@{'/producto/editar/'+${prod.codProducto}}"> <i
-							class="fa fa-edit"></i>
-					</a> <a
-						th:onclick="'javascript:confirmarEliminar(\''+${prod.codProducto}+'\');'">
+					<td>
+						<a href="#" th:href="@{'/producto/editar/'+${prod.codProducto}}">
+							<i class="fa fa-edit"></i>
+						</a>
+						<a th:onclick="'javascript:confirmarEliminar(\''+${prod.codProducto}+'\');'">
 							<i class="fa fa-trash-alt"></i>
-					</a></td>
+						</a>
+					</td>
 				</tr>
 			</table>
 		</div>
 
 		<!--Modal Eliminar-->
-		<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog"
-			aria-labelledby="eliminarModal" aria-hidden="true">
+		<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="eliminarModal" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="eliminarModalTitulo">Confirmar
-							Eliminar</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
+						<h5 class="modal-title" id="eliminarModalTitulo">Confirmar Eliminar</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
-						<h6>Are you sure you want to delete this user?</h6>
+						<h6>¿ESTÁS SEGURO DE ELIMINAR ESTE PRODUCTO?</h6>
 					</div>
-					<input type="hidden" id="identificadorProducto"
-						name="productoId" />
+					<input type="hidden" id="identificadorProducto" name="productoId" />
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary"
-							th:onclick="eliminarProducto()">Delete User</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" th:onclick="eliminarProducto()">Borrar Producto</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<div th:insert="layouts/footer :: footer"></div>
+		
 	</div>
+	
 	<script type="text/javascript">
 		function confirmarEliminar(id) {
 			$('#modalEliminar').modal('show');
@@ -144,6 +141,7 @@
 			window.location = "eliminarProducto/" + id;
 		}
 	</script>
+	
 	<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
 		type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"

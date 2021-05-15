@@ -58,4 +58,10 @@ public class ClienteServiceImp implements IClienteService{
 		}
 	}
 
+	@Override
+	public void eliminarCliente(int dni) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
