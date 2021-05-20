@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -26,10 +28,13 @@ public class Cliente {
 	@Column
 	private Integer idCliente;
 	@Column
+	@Min(100000)
+	@Max(99999999)
 	private int nroDocumento;
 	@Column
 	private String tipoDocumento;
 	@Column
+	@NotBlank(message="Incluir nombre y apellido")
 	private String nombreApellido;
 	@Column
 	private String email;

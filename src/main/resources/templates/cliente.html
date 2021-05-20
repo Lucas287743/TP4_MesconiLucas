@@ -31,6 +31,7 @@
 			<label for="numdoc" class="col-sm-2 col-form-label">Nro Documento</label>
 				<div class="col-sm-10">
 					<input type="number" id="numdoc" class="form-control" th:field="*{nroDocumento}" required>
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('nroDocumento')}" th:errors="*{nroDocumento}">Name	Error</div>
 				</div>
 			</div>
 			
@@ -38,6 +39,7 @@
 			<label for="nombre" class="col-sm-2 col-form-label">Nombre y Apellido</label>
 				<div class="col-sm-10">
 					<input type="text" id="nombre" class="form-control" th:field="*{nombreApellido}" required>
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('nombreApellido')}" th:errors="*{nombreApellido}">Name	Error</div>
 				</div>
 			</div>
 			

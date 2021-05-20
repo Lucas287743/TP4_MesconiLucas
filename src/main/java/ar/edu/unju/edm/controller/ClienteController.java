@@ -1,11 +1,14 @@
 package ar.edu.unju.edm.controller;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,11 +49,18 @@ public class ClienteController {
 	}
 
 	@PostMapping("/cliente/guardar")
-	public String guardarNuevoCliente(@ModelAttribute("unCliente") Cliente nuevoCliente, Model model) {		
-		LOGGER.info("METHOD: ingresando el metodo Guardar");
-		clienteService.guardarCliente(nuevoCliente);		
-		LOGGER.info("Tamaño del Listado: "+ clienteService.obtenerTodosClientes().size());
-		return "redirect:/cliente/mostrar";
+	public String guardarNuevoCliente(@Valid @ModelAttribute("unCliente") Cliente nuevoCliente, BindingResult resultado, Model model) {		
+		if(resultado.hasErrors()) {
+			model.addAttribute("unCliente", nuevoCliente);
+			model.addAttribute("clientes", clienteService.obtenerTodosClientes());
+			return("cliente");
+		}
+		else {//colocar un try y catch como en el postmapping de modificar cliente
+			LOGGER.info("METHOD: ingresando el metodo Guardar");
+			clienteService.guardarCliente(nuevoCliente);
+			LOGGER.info("Tamaño del Listado: "+ clienteService.obtenerTodosClientes().size());
+			return "redirect:/cliente/mostrar";
+		}
 	}
 	
 	@PostMapping("/cliente/modificar")
