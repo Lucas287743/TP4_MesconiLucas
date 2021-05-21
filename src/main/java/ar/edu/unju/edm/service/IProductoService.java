@@ -6,6 +6,7 @@ import ar.edu.unju.edm.model.Producto;
 
 public interface IProductoService {
 	public void guardarProducto(Producto unProducto);
+	public Producto obtenerProductoCodigo(Integer codigo);
 	public Producto crearProducto();
 	public List<Producto> obtenerTodosProductos();
 	public Producto encontrarUnProducto(int cod);
