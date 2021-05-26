@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,11 +47,18 @@ public class ProductoController {
 	}
 
 	@PostMapping("/producto/guardar")
-	public String guardarNuevoProducto(@ModelAttribute("unProducto") Producto nuevoProducto, Model model) {
-		LOGGER.info("METHOD: ingresando el metodo Guardar");
-		productoService.guardarProducto(nuevoProducto);
-		LOGGER.info("Tamaño del Listado: "+ productoService.obtenerTodosProductos().size());
-		return "redirect:/producto/mostrar";
+	public String guardarNuevoProducto(@ModelAttribute("unProducto") Producto nuevoProducto, BindingResult resultado, Model model) {
+		if(resultado.hasErrors()) {
+			model.addAttribute("unProducto", nuevoProducto);
+			model.addAttribute("productos", productoService.obtenerTodosProductos());
+			return("producto");
+		}
+		else {
+			LOGGER.info("METHOD: ingresando el metodo Guardar");
+			productoService.guardarProducto(nuevoProducto);
+			LOGGER.info("Tamaño del Listado: "+ productoService.obtenerTodosProductos().size());
+			return "redirect:/producto/mostrar";
+		}
 	}
 	
 	@PostMapping("/producto/modificar")
@@ -71,9 +79,15 @@ public class ProductoController {
 		return("producto");
 	}
 	
+	@GetMapping("/producto/cancelar")
+	public String cancelar() {
+		return "redirect:/producto/mostrar";
+	}
+	
 	@GetMapping("/producto/eliminarProducto/{id}")
 	public String eliminarProducto(Model model, @PathVariable(name="id") int id) {
-		try {			productoService.eliminarProducto(id);			
+		try {
+			productoService.eliminarProducto(id);			
 		}
 		catch(Exception e){
 			model.addAttribute("listErrorMessage",e.getMessage());

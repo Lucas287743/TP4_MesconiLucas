@@ -69,7 +69,7 @@ public class ProductoServiceImp implements IProductoService{
 	}
 
 	@Override
-	public Producto obtenerProductoCodigo(Integer codigo) {
+	public Producto encontrarUnProductoId(int cod) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

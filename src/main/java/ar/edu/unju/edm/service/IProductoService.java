@@ -9,7 +9,7 @@ public interface IProductoService {
 	public Producto crearProducto();
 	public List<Producto> obtenerTodosProductos();
 	public Producto encontrarUnProducto(int cod) throws Exception;
-	public void modificarProducto(Producto productoModificado);
+	public Producto encontrarUnProductoId(int cod) throws Exception;
+	public void modificarProducto(Producto productoModificado) throws Exception;
 	public void eliminarProducto(int cod) throws Exception;
-	public Producto obtenerProductoCodigo(Integer codigo);
 }

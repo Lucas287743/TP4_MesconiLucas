@@ -81,7 +81,7 @@ public class ClienteController {
 		return("cliente");
 	}
 	
-	@GetMapping("/cancelar")
+	@GetMapping("/cliente/cancelar")
 	public String cancelar() {
 		return "redirect:/cliente/mostrar";
 	}

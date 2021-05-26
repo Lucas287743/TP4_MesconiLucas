@@ -35,7 +35,7 @@ public class VentaController {
 	public String realizarVenta(Model model, @PathVariable(name="codigo") Integer codigo) throws Exception {
 		Venta venta = new Venta();
 		try {
-			productoSeleccionado = productoService.obtenerProductoCodigo(codigo);
+			productoSeleccionado = productoService.encontrarUnProducto(codigo);
 			venta = iVentas.crearVenta();		
 			venta.setProducto(productoSeleccionado);
 			model.addAttribute("venta",venta);

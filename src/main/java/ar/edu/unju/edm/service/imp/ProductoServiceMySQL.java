@@ -45,9 +45,19 @@ public class ProductoServiceMySQL implements IProductoService{
 	}
 	
 	@Override
-	public void modificarProducto(Producto productoModificado) {
+	public void modificarProducto(Producto unProductoModificado) throws Exception {
 		// TODO Auto-generated method stub
-		
+		Producto productoAModificar = productoDAO.findByCodProducto(unProductoModificado.getCodProducto()).orElseThrow(()->new Exception("El Producto no fue encontrado"));
+		cambiarProducto(unProductoModificado, productoAModificar);
+		productoDAO.save(productoAModificar);
+	}
+	
+	private void cambiarProducto(Producto desde, Producto hacia) {
+		hacia.setCodProducto(desde.getCodProducto());
+		hacia.setMarca(desde.getMarca());
+		hacia.setNombre(desde.getNombre());
+		hacia.setPrecio(desde.getPrecio());
+		hacia.setStock(desde.getStock());
 	}
 	
 	@Override
@@ -58,8 +68,8 @@ public class ProductoServiceMySQL implements IProductoService{
 	}
 
 	@Override
-	public Producto obtenerProductoCodigo(Integer codigo) {
+	public Producto encontrarUnProductoId(int cod) throws Exception{
 		// TODO Auto-generated method stub
-		return null;
+		return productoDAO.findById(cod).orElseThrow(()->new Exception("El producto NO existe"));
 	}
 }
