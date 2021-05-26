@@ -1,14 +1,44 @@
 package ar.edu.unju.edm.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.stereotype.Component;
 
+@Entity
+@Table (name="PRODUCTOS")
 @Component
 public class Producto {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private Integer idProducto;
+	
+	@Column
 	private int codProducto;
+	
+	@Column
+	@NotBlank(message="Incluir nombre")
 	private String nombre;
+	
 	//agregar descripcion
+	
+	@Column
+	@Min(0)
 	private double precio;
+	
+	@Column
+	@NotBlank(message="Incluir marca")
 	private String marca;
+	
+	@Column
+	@Min(0)
 	private int stock;	
 	
 	//@OneToMany(cascade = CascadeType.ALL)

@@ -22,7 +22,7 @@ public class ClienteController {
 	private static final Log LOGGER = LogFactory.getLog(ClienteController.class);
 	
 	@Autowired
-	@Qualifier("impmysql")
+	@Qualifier("impclientemysql")
 	IClienteService clienteService;
 	
 	@GetMapping("/cliente/mostrar")
@@ -30,6 +30,21 @@ public class ClienteController {
 		model.addAttribute("unCliente", clienteService.crearCliente());
 		model.addAttribute("clientes", clienteService.obtenerTodosClientes());
 		return("cliente");
+	}
+	
+	@PostMapping("/cliente/guardar")
+	public String guardarNuevoCliente(@Valid @ModelAttribute("unCliente") Cliente nuevoCliente, BindingResult resultado, Model model) {		
+		if(resultado.hasErrors()) {
+			model.addAttribute("unCliente", nuevoCliente);
+			model.addAttribute("clientes", clienteService.obtenerTodosClientes());
+			return("cliente");
+		}
+		else {//colocar un try y catch como en el postmapping de modificar cliente
+			LOGGER.info("METHOD: ingresando el metodo Guardar");
+			clienteService.guardarCliente(nuevoCliente);
+			LOGGER.info("Tamaño del Listado: "+ clienteService.obtenerTodosClientes().size());
+			return "redirect:/cliente/mostrar";
+		}
 	}
 	
 	@GetMapping("/cliente/editar/{nroDocumento}")
@@ -46,21 +61,6 @@ public class ClienteController {
 		}
 		model.addAttribute("clientes", clienteService.obtenerTodosClientes());
 		return("cliente");
-	}
-
-	@PostMapping("/cliente/guardar")
-	public String guardarNuevoCliente(@Valid @ModelAttribute("unCliente") Cliente nuevoCliente, BindingResult resultado, Model model) {		
-		if(resultado.hasErrors()) {
-			model.addAttribute("unCliente", nuevoCliente);
-			model.addAttribute("clientes", clienteService.obtenerTodosClientes());
-			return("cliente");
-		}
-		else {//colocar un try y catch como en el postmapping de modificar cliente
-			LOGGER.info("METHOD: ingresando el metodo Guardar");
-			clienteService.guardarCliente(nuevoCliente);
-			LOGGER.info("Tamaño del Listado: "+ clienteService.obtenerTodosClientes().size());
-			return "redirect:/cliente/mostrar";
-		}
 	}
 	
 	@PostMapping("/cliente/modificar")
@@ -79,5 +79,22 @@ public class ClienteController {
 		}
 		model.addAttribute("clientes", clienteService.obtenerTodosClientes());
 		return("cliente");
+	}
+	
+	@GetMapping("/cancelar")
+	public String cancelar() {
+		return "redirect:/cliente/mostrar";
+	}
+	
+	@GetMapping("/cliente/eliminarCliente/{id}")
+	public String eliminarCliente(Model model, @PathVariable(name="id") int id) {
+		LOGGER.info("METHOD: ingresando el metodo Eliminar");
+		try {
+			clienteService.eliminarCliente(id);			
+		}
+		catch(Exception e){
+			model.addAttribute("listErrorMessage",e.getMessage());
+		}			
+		return "redirect:/cliente/mostrar";
 	}
 }

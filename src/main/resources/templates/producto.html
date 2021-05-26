@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link th:rel="stylesheet" type="text/css"
-	th:href="@{/css/misestilos.css}">
-<link th:rel="stylesheet" type="text/css"
-	th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
-<link th:rel="stylesheet"
-	th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Producto</title>
+	<link th:rel="stylesheet" type="text/css" th:href="@{/css/misestilos.css}">
+	<link th:rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} " />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Producto</title>
+	<link th:rel="icon" type="image/png" th:href="@{/img/iconoproducto.png}" />
 </head>
 <body>
 	<div class="container">
@@ -17,9 +15,7 @@
 
 		<h1>Formulario de Carga de Producto</h1>
 
-		<form id="formProducto" th:object="${unProducto}"
-			th:action="${editMode}?@{/producto/modificar}:@{/producto/guardar}"
-			method="post">
+		<form id="formProducto" th:object="${unProducto}" th:action="${editMode}?@{/producto/modificar}:@{/producto/guardar}" method="post">
 
 			<div class="form-group row">
 				<label for="codigo" class="col-sm-2 col-form-label">Codigo</label>
@@ -28,12 +24,13 @@
 						th:field="*{codProducto}" required>
 				</div>
 			</div>
+			
 
 			<div class="form-group row">
 				<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 				<div class="col-sm-10">
-					<input type="text" id="nombre" class="form-control"
-						th:field="*{nombre}" required>
+					<input type="text" id="nombre" class="form-control" th:field="*{nombre}" required>
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Name	Error</div>
 				</div>
 			</div>
 
@@ -61,10 +58,13 @@
 				</div>
 			</div>
 
-			<div>
-				<input type="submit" class="btn btn-success btn-block"
-					th:value="${editMode}?'Modificar Producto':'Crear Producto'">
-				<!-- <button type="submit" class="btn btn-primary" value="Agregar">Agregar</button> -->
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="submit" class="btn btn-success btn-block" th:value="${editMode}?'Modificar Producto':'Crear Producto'">
+				</div>
+				<div class="col-sm-6">				
+						<a class="btn btn-secondary btn-block" th:href="@{'/cancelar'}">Cancelar</a>				
+				</div>
 			</div>
 		</form>
 		<!-- TABLA-->

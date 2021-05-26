@@ -10,13 +10,11 @@
 </head>
 <body>
 	<div class="container">
-	
 		<div th:insert="layouts/header :: header"></div>
 		
 		<h1>Formulario de Carga de Cliente</h1>
 		
 		<form id="formCliente" th:object="${unCliente}" th:action="${editMode}?@{/cliente/modificar}:@{/cliente/guardar}" method="post">
-			
 			<div class="form-group row">
 				<label for="tipo" class="col-sm-2 col-form-label">Tipo de Documento</label>
 				<div class="col-sm-10">
@@ -31,7 +29,7 @@
 			<label for="numdoc" class="col-sm-2 col-form-label">Nro Documento</label>
 				<div class="col-sm-10">
 					<input type="number" id="numdoc" class="form-control" th:field="*{nroDocumento}" required>
-					<div class="alert alert-danger" th:if="${#fields.hasErrors('nroDocumento')}" th:errors="*{nroDocumento}">Name	Error</div>
+					<div class="alert alert-danger" th:if="${#fields.hasErrors('nroDocumento')}" th:errors="*{nroDocumento}">dni	Error</div>
 				</div>
 			</div>
 			
@@ -39,7 +37,6 @@
 			<label for="nombre" class="col-sm-2 col-form-label">Nombre y Apellido</label>
 				<div class="col-sm-10">
 					<input type="text" id="nombre" class="form-control" th:field="*{nombreApellido}" required>
-					<div class="alert alert-danger" th:if="${#fields.hasErrors('nombreApellido')}" th:errors="*{nombreApellido}">Name	Error</div>
 				</div>
 			</div>
 			
@@ -85,9 +82,13 @@
 				</div>
 			</div>
 			
-			<div>
-				<!-- <button type="submit" value="Agregar" class="btn btn-primary">Agregar</button> -->
-				<input type="submit" class="btn btn-success btn-block"  th:value="${editMode}?'Modificar Cliente':'Crear Cliente'">
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="submit" class="btn btn-success btn-block"  th:value="${editMode}?'Modificar Cliente':'Crear Cliente'">
+				</div>
+				<div class="col-sm-6">				
+						<a class="btn btn-secondary btn-block" th:href="@{'/cancelar'}">Cancelar</a>				
+				</div>
 			</div>
 		</form>
 		
@@ -167,9 +168,9 @@
 			$("#identificadorCliente").val(id);
 		}
 
-		function eliminarProducto() {
+		function eliminarCliente() {
 			var id = $("#identificadorCliente").val();
-			window.location = "eliminarCliente/" + id;
+			window.location = "eliminarCliente/"+id;
 		}
 	</script>
 	

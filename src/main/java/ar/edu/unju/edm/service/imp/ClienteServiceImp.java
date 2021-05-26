@@ -64,4 +64,10 @@ public class ClienteServiceImp implements IClienteService{
 		
 	}
 
+	@Override
+	public Cliente encontrarUnClienteId(int id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

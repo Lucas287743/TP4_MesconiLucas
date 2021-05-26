@@ -16,7 +16,7 @@ import ar.edu.unju.edm.service.IVentaService;
 public class VentaController {
 	
 	@Autowired
-	@Qualifier("otroImp")
+	@Qualifier("impproductomysql")
 	IProductoService productoService;
 	
 	@Autowired

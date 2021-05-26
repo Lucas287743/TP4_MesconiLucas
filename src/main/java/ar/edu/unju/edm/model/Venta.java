@@ -19,21 +19,24 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name="ventas")
 public class Venta {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Integer idVenta;
-	@Column
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idProducto")
 	private Producto producto;
-	@Column
+	
 	@ManyToOne(cascade = CascadeType.ALL)	//cascada afecta a todo, si borro un cliente de venta, se borrará el cliente
 	@JoinColumn(name = "idCliente")
 	private Cliente cliente;
+	
 	@Column
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaVenta;
+	
 	@Column
 	private Integer cantProductos;
 	

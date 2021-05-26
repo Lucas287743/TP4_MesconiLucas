@@ -19,7 +19,7 @@ public class ProductoController {
 	private static final Log LOGGER = LogFactory.getLog(ProductoController.class);
 	
 	@Autowired
-	@Qualifier("otroImp")
+	@Qualifier("impproductomysql")
 	IProductoService productoService;
 	
 	@GetMapping("/producto/mostrar")
