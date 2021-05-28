@@ -9,18 +9,18 @@
 </head>
 <body>
 	<div class="container">
-		<div th:insert="layouts/header :: header"></div>
+<!-- 		<div th:insert="layouts/header :: header"></div> -->
 		<div class="col-sm-4">
 			<div>
 				<h2>Acceder</h2>
-				<form>
+				<form th:action="@{/login}"	method="post">
 					<div class="form-group row">
 						<label for="idusuario">Nombre de Usuario</label>
-						<input type="text" class="form-control" id="idusuario" required>
+						<input type="text" name="correo" class="form-control" id="idusuario" required>
 					</div>
 					<div class="form-group row">
 						<label for="contraseña">Password</label>
-						<input type="password" class="form-control" id="contraseña" required>
+						<input type="password" name="password" class="form-control" id="contraseña" required>
 					</div>
 					<div class="form-group form-check">
 						<input type="checkbox" class="form-check-input" id="recordarme">
